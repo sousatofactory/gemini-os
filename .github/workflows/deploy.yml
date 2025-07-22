@@ -14,4 +14,4 @@ jobs:
         user: ${{ secrets.USER }}
         password: ${{ secrets.PASS }}
         localDir: "dist"
-        remotePath: "/public_html/gemini-os"
+        remoteDir: "/public_html/gemini-os"
