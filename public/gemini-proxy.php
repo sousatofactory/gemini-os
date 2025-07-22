@@ -3,14 +3,17 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *"); // Em produção, restrinja para o seu domínio
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Obtenha a chave da API de uma variável de ambiente (mais seguro)
-$apiKey = getenv('GEMINI_API_KEY');
+// Inclui o arquivo de configuração com a chave da API
+// Este arquivo deve estar FORA da pasta public_html (ou www) do seu site.
+require_once(__DIR__ . '/../config.php');
 
-if (!$apiKey) {
+// Obtenha a chave da API da constante definida no config.php
+if (!defined('GEMINI_API_KEY')) {
     http_response_code(500);
-    echo json_encode(['error' => 'A chave da API do Gemini não está configurada no servidor.']);
+    echo json_encode(['error' => 'A constante GEMINI_API_KEY não está definida no config.php.']);
     exit;
 }
+$apiKey = GEMINI_API_KEY;
 
 $input = json_decode(file_get_contents('php://input'), true);
 
