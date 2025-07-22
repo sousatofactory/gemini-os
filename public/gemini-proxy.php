@@ -8,12 +8,12 @@ header("Access-Control-Allow-Headers: Content-Type");
 require_once(__DIR__ . '/../../config.php');
 
 // Obtenha a chave da API da constante definida no config.php
-if (!defined('GEMINI_API_KEY')) {
+if (!defined('GEMINI_API_KEY_PRIMARY')) {
     http_response_code(500);
-    echo json_encode(['error' => 'A constante GEMINI_API_KEY não está definida no config.php.']);
+    echo json_encode(['error' => 'A constante GEMINI_API_KEY_PRIMARY não está definida no config.php.']);
     exit;
 }
-$apiKey = GEMINI_API_KEY;
+$apiKey = GEMINI_API_KEY_PRIMARY;
 
 $input = json_decode(file_get_contents('php://input'), true);
 
