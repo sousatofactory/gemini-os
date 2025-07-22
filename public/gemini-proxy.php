@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 // Inclui o arquivo de configuração com a chave da API
 // Este arquivo deve estar FORA da pasta public_html (ou www) do seu site.
-require_once(__DIR__ . '/../config.php');
+require_once(__DIR__ . '/../../config.php');
 
 // Obtenha a chave da API da constante definida no config.php
 if (!defined('GEMINI_API_KEY')) {
