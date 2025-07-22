@@ -15,11 +15,25 @@ if (!defined('GEMINI_API_KEY_PRIMARY')) {
 }
 $apiKey = GEMINI_API_KEY_PRIMARY;
 
-$input = json_decode(file_get_contents('php://input'), true);
+$rawInput = file_get_contents('php://input');
 
-if (!isset($input['prompt']) || empty($input['prompt'])) {
+if (empty($rawInput)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Nenhum prompt fornecido.']);
+    echo json_encode(['error' => 'Corpo da requisição vazio.']);
+    exit;
+}
+
+$input = json_decode($rawInput, true);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Erro ao decodificar JSON: ' . json_last_error_msg()]);
+    exit;
+}
+
+if (!is_array($input) || !isset($input['prompt']) || empty($input['prompt'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Nenhum prompt fornecido ou formato JSON inválido.']);
     exit;
 }
 
