@@ -10,7 +10,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18' # Ou a versão que você usa localmente
+        node-version: '20' # Ou a versão que você usa localmente
 
     - name: Install dependencies
       run: npm install
